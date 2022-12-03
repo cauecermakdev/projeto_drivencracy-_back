@@ -1,11 +1,9 @@
 import {Router} from "express";
-import authRouter from "./authRouter.js"
-import userRouter from "./userRouter.js"
-import courseRouter from "./courseRouter.js"
+import choiceRouter from "./choiceRouter.js"
+import pollRouter from "./pollRouter.js"
 
 const router = Router();
-router.use(authRouter);
-router.use(userRouter);
-router.use(courseRouter);
+router.use(choiceRouter);
+router.use(pollRouter);
 
 export default router;
