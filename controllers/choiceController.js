@@ -94,24 +94,47 @@ export async function choicePost(req, res) {
 
 }
 
-/* 
-export async function choiceVotePost(req, res) {
-    console.log("entrou opcaoDeVoto");
-
-    const choiceVote = req.body;
 
 
+export async function choiceVotePost(req,res){
+
+    //nao recebe nada da requisicao body
+   
+    console.log("choiceVotePost");
+    const {id} = req.params;
+    console.log("choiceVotePost id",id);
+
+    const opcaoVotoExiste = await db.collection("choiceVote").find({_id:ObjectId(id)}).toArray();
+    console.log("opcaoVotoExiste",opcaoVotoExiste);
     
-    enqueteExiste(title);
+    console.log("opcaoVotoExiste.length",opcaoVotoExiste.length);
 
-    try {
-        const choiceCollection = await db.collection("choices").insertOne({ ...choiceVote });
-        await db.collection("choices").findOne({ _id: ObjectId(choiceCollection.pollId) });
-        return res.status(201).send("Opcao de voto inserida");
+    if(opcaoVotoExiste.length === 0 ){
+        res.status(404).send("Opcao de voto não existe");
+        return;
+    } 
 
-    } catch {
-        return res.status(201).send("Opcao de voto não inserida. Erro!");
+/*     //verificar se a enquete da opcao de voto já está expirada
+    if(await enqueteExpirada(opcaoVotoExiste.pollId)){
+        res.status(403).send("enquete expirada");
+        return;
+    } */
+
+    //o formato do body
+    const objetoVotoPost = {
+        createdAt: dayjs().format("YYYY-MM-DD hh:mm"),
+        choiceId: ObjectId(id)
     }
 
+    try {
+        await db.collection("votes").insertOne(objetoVotoPost);
+        res.status(201).send(objetoVotoPost);
+        return;
+    }catch{
+        res.status(404).send("Não foi possível dar get")
+        return;
+    } 
+
 }
- */
+
+

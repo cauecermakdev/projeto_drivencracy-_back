@@ -1,0 +1,26 @@
+
+
+//id da enquete povoada
+638caa9950e9d0203a387c34
+
+//opcoes de voto
+
+[
+    {
+      "_id": "638cabae50e9d0203a387c35",
+      "title": "1 opcao",
+      "pollId": "638caa9950e9d0203a387c34"
+    },
+    {
+      "_id": "638cabb450e9d0203a387c36",
+      "title": "2 opcao",
+      "pollId": "638caa9950e9d0203a387c34"
+    },
+    {
+      "_id": "638cabb850e9d0203a387c37",
+      "title": "3 opcao",
+      "pollId": "638caa9950e9d0203a387c34"
+    }
+  ]
+]
+

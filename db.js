@@ -5,7 +5,8 @@ dotenv.config();
 const mongoClient =  new MongoClient(process.env.MONGO_URI);
 await mongoClient.connect();
 
-const db = mongoClient.db("yogapp_db");
+
+const db = mongoClient.db("drivencracy_db");
 
 export default db;
 //consigo exportar funcao, variavel, objeto, array, etc...

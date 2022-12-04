@@ -1,10 +1,12 @@
 import {Router} from "express"
-import {choicePost} from '../controllers/choiceController.js'
+import {choicePost,choiceVotePost} from '../controllers/choiceController.js'
 import {schemaValidationMiddlewareChoice} from '../middlewares/schemaValidationMiddlewareChoice.js'
 
 const choiceRouter = Router();
 choiceRouter.post('/choice', schemaValidationMiddlewareChoice, choicePost);//opcao de voto
-//choiceRouter.post('/choice/:id/vote', choiceVotePost);
+choiceRouter.post('/choice/:id/vote', choiceVotePost);
+//falta schema do voto
+
 
 /* 
 choiceRouter.post('/choice', validateChoice, postChoice);
