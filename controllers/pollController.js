@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 
 async function enqueteExiste(title){
     console.log("entra function enqueteExsite ")
-    console.log(title);
+    console.log("title",title);
     //formato da enquete
     /*
     {
@@ -15,11 +15,11 @@ async function enqueteExiste(title){
     */
 
     //enquete existe ?
-    const enquete = await db.collection("poll").find({title:title});
-    //console.log(enquete.toArray());
+    const enquete = await db.collection("polls").find({title:title});
+    console.log("tem enquet?",enquete);
     //console.log("aqui")
 
-    if(enquete){
+    if(enquete.length > 0){
      console.log("enquete existe");
      return true;
     }else{
@@ -33,17 +33,20 @@ export async function pollPost(req, res) {
     console.log("entra no pollPost");
 
     const enquete  = req.body;
-    
+    console.log("enquete.title",enquete.title)
 
-/*     if(enqueteExiste(enquete.title)){
-        console.log("entra no if")
+    const enqueteExist = await db.collection("polls").find({title:enquete.title}).toArray();    
+    console.log("enqueteExist",enqueteExist);
+
+    if(enqueteExist.length > 0){
+        console.log("enquete ja existe");
+        res.status(401).send("enquete ja existe");
         return;
-    } */
+    } 
 
-    console.log("passa function enqueteexiste");
     
     if(!enquete.expireAt){
-        enquete.expireAt = dayjs().add(30,'day').format();        
+        enquete.expireAt = dayjs().add(30,'day').format("YYYY-MM-DD HH:mm");        
     }
 
     try{
@@ -161,6 +164,5 @@ export async function pollGetIdChoice(req,res){
 
 
     res.send(objetoMaisVotada);
-    
+
 }
- 
