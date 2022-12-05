@@ -114,11 +114,6 @@ export async function choiceVotePost(req,res){
         return;
     } 
 
-/*     //verificar se a enquete da opcao de voto já está expirada
-    if(await enqueteExpirada(opcaoVotoExiste.pollId)){
-        res.status(403).send("enquete expirada");
-        return;
-    } */
 
     //o formato do body
     const objetoVotoPost = {
